@@ -1,0 +1,22 @@
+{
+  "neodev": {
+    "library": {
+      "enabled": true,
+      "plugins": [
+		"neoconf.nvim",
+      ]
+    }
+  },
+  "neoconf": {
+    "plugins": {
+      "sumneko_lua": {
+        "enabled": true
+      },
+    }
+  },
+  "lspconfig": {
+    "sumneko_lua": {
+      "Lua.completion.callSnippet": "Replace",
+    },
+  }
+}
