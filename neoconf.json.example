@@ -1,0 +1,28 @@
+{
+  "neodev": {
+    "library": {
+      "enabled": true,
+      "plugins": [
+		"neoconf.nvim"
+      ]
+    }
+  },
+  "neoconf": {
+    "plugins": {
+      "sumneko_lua": {
+        "enabled": true
+      }
+    }
+  },
+  // here we invade!
+  "invader": {
+	"enabled": true,
+	// here we add our typelibs
+	"typelibs": ["Vte-2.91"]
+  },
+  "lspconfig": {
+    "sumneko_lua": {
+      "Lua.completion.callSnippet": "Replace"
+    }
+  }
+}
