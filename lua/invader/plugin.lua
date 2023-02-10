@@ -1,7 +1,16 @@
 local Util = require("neoconf.util")
-local Config = require("neoconf.config")
+local Neoconf = require("neoconf")
+local ic = require("invader.config")
+local cmd = require("invader.command")
 
 local M = {}
+
+function M.on_schema(schema)
+  schema:import("invader", ic.defaults)
+  schema:set("invader.typelibs", {
+    description = "Typelibs we want to use",
+  })
+end
 
 function M.setup()
   Util.on_config({
@@ -11,12 +20,22 @@ function M.setup()
 end
 
 function M.on_new_config(config, root_dir)
-  if config.name == "invader" then
-    local settings = Config.get({ file = root_dir })
+  if config.name == "sumneko_lua" then
+    local invader = Neoconf.get("invader", ic.defaults)
 
-    local enabled = settings.plugins.sumneko_lua.enabled
-    if not enabled and settings.plugins.sumneko_lua.enabled_for_neovim_config then
-      enabled = Util.is_nvim_config(root_dir)
+    local enabled = invader.enabled
+
+    if not enabled then
+      return
+    end
+
+    local stubs = {}
+    for _, gir in ipairs(invader.typelibs) do
+      if cmd.is_installed(gir) then
+        gir = gir:gsub("[-.]", "_")
+        local target = ic.settings.path .. "/" .. gir
+        table.insert(stubs, target)
+      end
     end
 
     if enabled then
@@ -28,7 +47,7 @@ function M.on_new_config(config, root_dir)
         },
       }, config.settings)
 
-      vim.list_extend(config.settings.Lua.workspace.library, { Util.path("types"), Util.path("types") .. "/lua" })
+      vim.list_extend(config.settings.Lua.workspace.library, stubs)
     end
   end
 end
