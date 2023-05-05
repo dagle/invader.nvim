@@ -18,6 +18,7 @@ function M.install(gir)
     error("Need to specify a gir")
   end
   local cmd = ic.settings.cmd(ic.settings.path, gir)
+  print("Installing " .. gir)
   vim.fn.jobstart(cmd, {
     stderr_buffered = true,
     stdout_buffered = true,
@@ -54,12 +55,13 @@ function M.uninstall(gir)
 end
 
 vim.api.nvim_create_user_command("Invader", function (args)
-  if #args.fargs < 1 then
+  if #args.fargs < 2 then
     error("Need at least 2 arguments")
   end
 
-  for key, fun in ipairs(M) do
+  for key, fun in pairs(M) do
     if args.fargs[1] == key then
+      print(key)
       fun(args.fargs[2])
     end
   end
