@@ -20,7 +20,7 @@ function M.setup()
 end
 
 function M.on_new_config(config, root_dir)
-  if config.name == "sumneko_lua" then
+  if config.name == "lua_ls" then
     local invader = Neoconf.get("invader", ic.defaults)
 
     local enabled = invader.enabled
