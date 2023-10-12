@@ -11,7 +11,7 @@ local defaults = {
 
 local settings = {
   cmd = function (path, obj)
-    return string.format("gir-to-stub -l lua -o %s %s.gir", path, obj)
+    return string.format("gir-to-stub -l lua %s.gir %s", obj, path)
   end,
   path = vim.fn.stdpath("data") .. "/gir-stub",
   ask = false,
