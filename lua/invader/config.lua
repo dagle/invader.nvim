@@ -1,7 +1,7 @@
 local defaults = {
-  enabled = false,
-  -- a way to always add the base libs
-  typelibs = {},
+	enabled = false,
+	-- a way to always add the base libs
+	typelibs = {},
 }
 
 ---@class InvaderSettings
@@ -18,8 +18,8 @@ local settings = {
 }
 
 local config = {
-  defaults = defaults,
-  settings = settings,
+	defaults = defaults,
+	settings = settings,
 }
 
 return config
