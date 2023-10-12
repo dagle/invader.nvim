@@ -23,9 +23,7 @@ function M.on_new_config(config, root_dir)
   if config.name == "lua_ls" then
     local invader = Neoconf.get("invader", ic.defaults)
 
-    local enabled = invader.enabled
-
-    if not enabled then
+    if not invader.enabled then
       return
     end
 
@@ -38,17 +36,15 @@ function M.on_new_config(config, root_dir)
       end
     end
 
-    if enabled then
-      config.settings = Util.merge({
-        Lua = {
-          workspace = {
-            library = {},
-          },
+    config.settings = Util.merge({
+      Lua = {
+        workspace = {
+          library = {},
         },
-      }, config.settings)
+      },
+    }, config.settings)
 
-      vim.list_extend(config.settings.Lua.workspace.library, stubs)
-    end
+    vim.list_extend(config.settings.Lua.workspace.library, stubs)
   end
 end
 

@@ -4,6 +4,7 @@ local ic = require("invader.config")
 
 local M = {}
 
+--- @param opts InvaderSettings
 function M.setup(opts)
   ic.settings = vim.tbl_extend("keep", opts, ic.settings)
   np.register(plugin)

@@ -4,6 +4,11 @@ local defaults = {
   typelibs = {},
 }
 
+---@class InvaderSettings
+---@field cmd fun(path, object)|nil
+---@field path string|nil
+---@field ask boolean|nil
+
 local settings = {
   cmd = function (path, obj)
     return string.format("gir-to-stub -l lua -o %s %s.gir", path, obj)
